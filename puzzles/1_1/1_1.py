@@ -6,7 +6,7 @@ f = open("input.txt", "r")
 for line in f.readlines():
     num = int(line.strip())
     print(num)
-    compliment = 2020 - num
+    compliment = target - num
     if (array[compliment]):
         print(str(num) + " and " + str(compliment) + " multiplied is " + str(num*compliment))
         exit()
