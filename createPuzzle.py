@@ -31,7 +31,7 @@ part1InputPath = os.path.join(part1Dir, 'input.txt')
 part2InputPath = os.path.join(part2Dir, 'input.txt')
 
 if (part == 1):
-    print("part 1")
+    # print("part 1")
     fileWasCreated = makeDir(part1Dir)
     if(not fileWasCreated):
         prompt = input(part1Dir + " already exists, are you sure you want to clobber it? 'yes' to continue, anything else to stop: ")
@@ -48,17 +48,25 @@ if (part == 1):
 
     cookies = {'session': session}
     inputUrl = "https://adventofcode.com/" + AOC_YEAR + "/day/" + str(day) + "/input"
-    print(inputUrl)
-    print(part1InputPath)
-    # urllib.request.urlretrieve(inputUrl, part1InputPath)
-    # urllib.request.urlretrieve(inputUrl)
+    # print(inputUrl)
+    # print(part1InputPath)
 
     r = requests.get(inputUrl, cookies=cookies)
     with open(part1InputPath, 'wb') as f:
         f.write(r.content)
+    lines = r.text.split('\n')
+    targetLineCount = 3
+    if (len(lines) < targetLineCount):
+        print("Full Input (less than " + str(targetLineCount) + " lines, maybe ERROR!):")
+        print(r.text)
+    else:
+        print("First " + str(targetLineCount) + " lines of input:")
+        for lineIndex in range(targetLineCount):
+            print(lines[lineIndex])
+        # print(r.text[0:newLinePos])
     print("Created: " + part1Dir)
 elif (part == 2):
-    print("part 2")
+    # print("part 2")
     fileWasCreated = makeDir(part2Dir)
     if(not fileWasCreated):
         prompt = input(part2Dir + " already exists, are you sure you want to clobber it? 'yes' to continue, anything else to stop: ")
